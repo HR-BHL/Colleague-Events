@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>What's On</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap">
+<style>
+  /* Layout: a centred jeweller's-catalogue masthead on ivory, quiet letterspaced filters, then events as a grid of finely framed cards grouped by month. */
+  :root {
+    --bg: #fbfaf7;
+    --surface: #ffffff;
+    --ink: #14120f;
+    --muted: #3f3a33;
+    --line: #e4ddd0;
+    --gold: #7e6026;
+    --gold-soft: #cdb582;
+    --gem: #7a1f2b;
+    --font-display: "Cormorant Garamond", "Didot", "Bodoni 72", Georgia, serif;
+    --font-caps: "Cinzel", "Trajan Pro", "Optima", Georgia, serif;
+    --font-body: "Jost", "Futura", "Century Gothic", "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0e0d0c; --surface: #171513; --ink: #f5f1ea; --muted: #d3cbbf; --line: #332e27;
+      --gold: #dcbf86; --gold-soft: #7d6a45; --gem: #e08394;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0e0d0c; --surface: #171513; --ink: #f5f1ea; --muted: #d3cbbf; --line: #332e27;
+    --gold: #dcbf86; --gold-soft: #7d6a45; --gem: #e08394;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 400 17px/1.65 var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 20px; padding-block: 60px 88px; }
+
+  /* Masthead */
+  header { text-align: center; }
+  .logo { display: block; width: min(270px, 70%); height: auto; margin: 0 auto 30px; }
+  .eyebrow {
+    font: 500 0.8rem/1 var(--font-caps); letter-spacing: 0.36em; text-transform: uppercase;
+    color: var(--gold); margin: 0 0 20px; padding-left: 0.36em;
+  }
+  h1 {
+    font: 400 clamp(3.4rem, 11vw, 6.6rem)/0.92 var(--font-display);
+    letter-spacing: 0.01em; margin: 0; text-wrap: balance;
+  }
+  h1 em { font-style: italic; color: var(--gold); }
+  .ornament { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 26px auto 20px; max-width: 320px; }
+  .ornament::before, .ornament::after { content: ""; flex: 1; height: 1px; background: var(--gold-soft); }
+  .ornament svg { width: 14px; height: 14px; flex: none; }
+  .lede { margin: 0 auto; max-width: 44ch; color: var(--muted); font-size: 1.1rem; text-wrap: balance; }
+  .today {
+    display: inline-block; margin-top: 20px;
+    font: 500 0.78rem/1 var(--font-caps); letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted);
+  }
+
+  /* Filters */
+  .filters {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px 30px;
+    margin: 48px 0 0; padding: 16px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  }
+  .tab {
+    font: 500 0.84rem/1 var(--font-caps); letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); background: none; border: 0; padding: 12px 0 9px; cursor: pointer;
+    border-bottom: 1px solid transparent; transition: color .2s, border-color .2s;
+  }
+  .tab:hover { color: var(--ink); }
+  .tab[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--gold); }
+  .month-pick { position: relative; }
+  .month-pick label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  select {
+    font: 500 0.84rem/1 var(--font-caps); letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink); background-color: transparent; border: 1px solid var(--line); border-radius: 0;
+    padding: 11px 34px 10px 14px; cursor: pointer; appearance: none; -webkit-appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--gold) 50%), linear-gradient(135deg, var(--gold) 50%, transparent 50%);
+    background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%;
+    background-size: 5px 5px; background-repeat: no-repeat;
+  }
+  select option { background: var(--surface); color: var(--ink); text-transform: none; letter-spacing: 0; }
+  .tab:focus-visible, select:focus-visible, .event a:focus-visible { outline: 1px solid var(--gold); outline-offset: 4px; }
+
+  .count {
+    text-align: center; margin: 22px 0 0; color: var(--muted);
+    font: italic 500 1.2rem/1.4 var(--font-display);
+  }
+
+  /* Event list */
+  .month { margin-top: 44px; }
+  .month h2 {
+    display: flex; align-items: center; gap: 18px;
+    font: 500 0.92rem/1 var(--font-caps); letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold);
+    margin: 0;
+  }
+  .month h2::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 22px; margin-top: 20px; }
+  .event {
+    position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: 1fr auto; gap: 18px;
+    background: var(--surface); border: 1px solid var(--line); padding: 26px 24px 24px;
+    transition: border-color .25s, transform .25s;
+  }
+  .event::before { content: ""; position: absolute; inset: 5px; border: 1px solid transparent; pointer-events: none; transition: border-color .25s; }
+  .event:hover { border-color: var(--gold-soft); transform: translateY(-2px); }
+  .event:hover::before { border-color: var(--line); }
+
+  /* Engraved date plaque */
+  .date {
+    width: 66px; align-self: start; text-align: center; font-variant-numeric: lining-nums tabular-nums;
+    border: 1px solid var(--gold-soft); padding: 10px 0 11px;
+  }
+  .date .mon { display: block; font: 500 0.7rem/1 var(--font-caps); letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); padding-left: 0.22em; }
+  .date .day { display: block; font: 500 2.5rem/1 var(--font-display); margin: 4px 0 9px; }
+  .date .dow { display: block; font: 500 0.66rem/1 var(--font-caps); letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); padding-left: 0.2em; }
+
+  .info { position: relative; min-width: 0; display: flex; flex-direction: column; }
+  .event h3 { font: 600 1.7rem/1.12 var(--font-display); margin: 0; text-wrap: balance; }
+  .badge {
+    align-self: start; margin-bottom: 8px;
+    font: 600 0.68rem/1 var(--font-caps); letter-spacing: 0.24em; text-transform: uppercase; color: var(--gem);
+  }
+  .meta {
+    display: flex; flex-direction: column; gap: 2px; margin-top: 8px;
+    font: 500 0.8rem/1.4 var(--font-body); letter-spacing: 0.05em; text-transform: uppercase; color: var(--gold);
+  }
+  .teaser { margin: 10px 0 0; font-size: 1rem; line-height: 1.6; color: var(--muted); }
+  .action { position: relative; grid-column: 1 / -1; }
+
+  .cta {
+    display: inline-flex; align-items: center; gap: 10px; white-space: nowrap;
+    font: 500 0.76rem/1 var(--font-caps); letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ink); text-decoration: none; padding: 13px 18px 12px; border: 1px solid var(--ink);
+    transition: background .25s, color .25s;
+  }
+  a.cta:hover { background: var(--ink); color: var(--bg); }
+  .cta .arrow { transition: transform .25s; }
+  a.cta:hover .arrow { transform: translateX(3px); }
+  .soon {
+    display: inline-flex; align-items: center; gap: 12px; padding: 12px 0;
+    font: italic 500 1.15rem/1 var(--font-display); color: var(--gold);
+  }
+  .soon::before { content: ""; width: 28px; height: 1px; background: var(--gold-soft); }
+
+  .past .event { opacity: 0.65; }
+
+  @media (max-width: 640px) {
+    .wrap { padding-block: 44px 64px; }
+    .filters { gap: 4px 22px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .tab, .cta, .cta .arrow, .event, .event::before { transition: none; } .event:hover { transform: none; } }
+
+  /* Plaque variant for events shown with words instead of a date */
+  .date.text .when { display: block; font: 600 1.05rem/1.05 var(--font-display); margin: 6px 4px 2px; }
+
+  /* Event page */
+  .back {
+    display: inline-flex; align-items: center; gap: 8px;
+    font: 500 0.78rem/1 var(--font-caps); letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none; padding: 8px 0;
+  }
+  .back:hover { color: var(--ink); }
+  .back:focus-visible, .detail a:focus-visible { outline: 1px solid var(--gold); outline-offset: 4px; }
+  .detail { max-width: 720px; margin: 0 auto; }
+  .detail-head { text-align: center; margin-top: 28px; }
+  .detail-head .logo { width: min(200px, 60%); margin-bottom: 28px; }
+  .detail-head h1 { font-size: clamp(2.6rem, 8vw, 4.4rem); font-weight: 500; line-height: 1; }
+  .facts {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0;
+    margin: 8px 0 0; border: 1px solid var(--line); background: var(--surface);
+  }
+  .facts div { padding: 18px 20px; border-right: 1px solid var(--line); min-width: 0; }
+  .facts div:last-child { border-right: 0; }
+  .facts dt { font: 500 0.7rem/1 var(--font-caps); letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .facts dd { margin: 0; font: 600 1.25rem/1.25 var(--font-display); }
+  .highlight {
+    position: relative; margin: 32px 0 0; padding: 22px 26px; text-align: center;
+    border: 1px solid var(--gold-soft); background: var(--surface);
+    font: italic 500 1.35rem/1.4 var(--font-display); color: var(--ink);
+  }
+  .highlight::before { content: ""; position: absolute; inset: 5px; border: 1px solid var(--line); pointer-events: none; }
+  .detail-body { margin-top: 32px; }
+  .detail-body p { margin: 0 0 18px; font-size: 1.08rem; line-height: 1.75; color: var(--muted); }
+  .detail-actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 34px; }
+  .detail-actions .cta { white-space: normal; text-align: center; }
+  .detail-foot { text-align: center; margin-top: 52px; padding-top: 24px; border-top: 1px solid var(--line); }
+  @media (max-width: 560px) { .facts div { border-right: 0; border-bottom: 1px solid var(--line); } .facts div:last-child { border-bottom: 0; } }
+
+  /* Photo gallery on event pages */
+  .gallery { margin-top: 52px; }
+  .gallery h2 {
+    display: flex; align-items: center; gap: 18px; margin: 0 0 20px;
+    font: 500 0.92rem/1 var(--font-caps); letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold);
+  }
+  .gallery h2::before, .gallery h2::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .photo { display: block; padding: 0; border: 1px solid var(--line); background: var(--surface); cursor: zoom-in; overflow: hidden; }
+  .photo img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; transition: transform .5s; }
+  .photo:hover img { transform: scale(1.03); }
+  .photo:first-child { grid-column: 1 / -1; }
+  .photo:first-child img { aspect-ratio: 16 / 9; }
+  .photo:focus-visible { outline: 1px solid var(--gold); outline-offset: 3px; }
+  @media (max-width: 560px) { .photos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+  .lightbox {
+    position: fixed; inset: 0; z-index: 10; display: flex; align-items: center; justify-content: center;
+    background: rgba(12, 11, 10, .94); padding: 56px 16px;
+  }
+  .lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; border: 1px solid rgba(220, 191, 134, .4); }
+  .lb-btn {
+    position: absolute; background: none; border: 0; cursor: pointer; color: #efe6d4;
+    font: 400 2rem/1 var(--font-display); padding: 12px 16px;
+  }
+  .lb-btn:hover, .lb-btn:focus-visible { color: #dcbf86; outline: none; }
+  .lb-close { top: calc(env(safe-area-inset-top, 0px) + 8px); right: 8px; }
+  .lb-prev { left: 4px; top: 50%; transform: translateY(-50%); }
+  .lb-next { right: 4px; top: 50%; transform: translateY(-50%); }
+  .lb-count { position: absolute; bottom: calc(env(safe-area-inset-bottom, 0px) + 18px); left: 0; right: 0; text-align: center; color: #cfc4b0; font: 500 0.72rem/1 var(--font-caps); letter-spacing: 0.24em; }
+  @media (prefers-reduced-motion: reduce) { .photo img { transition: none; } .photo:hover img { transform: none; } }
+
+  .empty { text-align: center; margin-top: 44px; padding: 48px 20px; border: 1px solid var(--line); }
+  .empty p { margin: 0 0 20px; font: italic 500 1.5rem/1.3 var(--font-display); color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<div id="hub">
+  <header>
+    <img class="logo" src="logo.png" alt="Bvlgari Hotel London" width="900" height="220">
+    <h1>What's <em>On</em></h1>
+    <div class="ornament" aria-hidden="true">
+      <svg viewBox="0 0 14 14"><path d="M4.1 0.5h5.8l3.6 3.6v5.8l-3.6 3.6H4.1L0.5 9.9V4.1z" fill="none" stroke="var(--gold)" stroke-width="1"/><path d="M7 3.5l3.5 3.5L7 10.5 3.5 7z" fill="var(--gold)"/></svg>
+    </div>
+    <p class="lede">Moments to connect, celebrate and look after one another. Choose an event to find out more.</p>
+    <span class="today" id="today"></span>
+  </header>
+
+  <nav class="filters" aria-label="Filter events by date">
+    <button class="tab" type="button" id="f-upcoming" data-range="upcoming" aria-pressed="true">Upcoming</button>
+    <button class="tab" type="button" id="f-week" data-range="week" aria-pressed="false">This week</button>
+    <button class="tab" type="button" id="f-month" data-range="month" aria-pressed="false">This month</button>
+    <button class="tab" type="button" id="f-next" data-range="next" aria-pressed="false">Next month</button>
+    <button class="tab" type="button" id="f-past" data-range="past" aria-pressed="false">Past</button>
+    <div class="month-pick">
+      <label for="month-select">Choose a month</label>
+      <select id="month-select"><option value="">By month</option></select>
+    </div>
+  </nav>
+
+  <p class="count" id="count" aria-live="polite"></p>
+  <main id="list"></main>
+</div>
+
+<article id="detail" class="detail" hidden></article>
+</div>
+
+<script src="events.js"></script>
+<script>
+(function () {
+  var list = document.getElementById("list");
+  var countEl = document.getElementById("count");
+  var select = document.getElementById("month-select");
+  var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab[data-range]"));
+
+  var MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  var DAYS = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  var DAY_MS = 86400000;
+  var FAR = new Date(9999, 0, 1);
+
+  function parseDate(s) {
+    var m = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(String(s || "").trim());
+    return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null;
+  }
+  function addDays(d, n) { var x = new Date(d); x.setDate(x.getDate() + n); return x; }
+  function daysBetween(a, b) { return Math.round((b - a) / DAY_MS); }
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+  function monthKey(d) { return d.getFullYear() + "-" + (d.getMonth() + 1); }
+  function short(d) { return d.getDate() + " " + MONTHS[d.getMonth()].slice(0, 3); }
+  function has(x) { return x != null && String(x).trim() !== ""; }
+
+  var now = new Date();
+  var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  document.getElementById("today").textContent = DAYS[today.getDay()] + " " + today.getDate() + " " + MONTHS[today.getMonth()] + " " + today.getFullYear();
+
+  if (typeof EVENTS === "undefined" || !Array.isArray(EVENTS)) {
+    list.innerHTML = '<div class="empty"><p>The event list couldn\'t be read.</p>Check the last change to <strong>events.js</strong> for a missing comma, quote mark or bracket.</div>';
+    return;
+  }
+
+  var events = EVENTS.map(function (e, i) {
+    var start = parseDate(e.date);
+    if (!start) { if (window.console) console.warn("What's On: skipped \"" + (e.name || "event " + (i + 1)) + "\", its date should look like 2026-11-05"); return null; }
+    var weekly = String(e.repeat || "").trim().toLowerCase() === "weekly";
+    var end = parseDate(e.endDate) || (weekly ? FAR : start);
+    if (end < start) end = start;
+    return { name: e.name, start: start, end: end, weekly: weekly, time: e.time, location: e.location,
+             organiser: e.organiser, teaser: e.teaser, link: e.link, dateText: e.dateText,
+             details: Array.isArray(e.details) ? e.details.filter(has) : (has(e.details) ? [e.details] : []),
+             highlight: e.highlight, buttonText: e.buttonText, buttonLink: e.buttonLink,
+             photos: Array.isArray(e.photos) ? e.photos.filter(has) : [], photosTitle: e.photosTitle };
+  }).filter(Boolean);
+
+  // Give every event with details a web-address-friendly id, e.g. "quarterly-celebrations-q3"
+  var byId = {};
+  events.forEach(function (e) {
+    if (!e.details.length) return;
+    var base = String(e.name || "event").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "event", id = base, n = 2;
+    while (byId[id]) id = base + "-" + n++;
+    e.id = id; byId[id] = e;
+  });
+
+  // For a date window [a, b], return the date to show this event under, or null if it doesn't fall in the window.
+  // One-off events show under their start date; weekly events show once, under their next date in the window.
+  function placeIn(e, a, b) {
+    if (e.end < a || e.start > b) return null;
+    if (!e.weekly) return e.start;
+    var d = e.start >= a ? e.start : addDays(e.start, Math.ceil(daysBetween(e.start, a) / 7) * 7);
+    return d <= b && d <= e.end ? d : null;
+  }
+
+  function lastOfMonth(y, m) { return new Date(y, m + 1, 0); }
+  var weekStart = addDays(today, -((today.getDay() + 6) % 7)); // Monday
+  var Y = today.getFullYear(), M = today.getMonth();
+  var windows = {
+    upcoming: [today, FAR],
+    week:     [today, addDays(weekStart, 6)],
+    month:    [today, lastOfMonth(Y, M)],
+    next:     [new Date(Y, M + 1, 1), lastOfMonth(Y, M + 1)]
+  };
+  var labels = { upcoming: "coming up", week: "this week", month: "for the rest of this month", next: "next month", past: "in the past" };
+
+  // Month dropdown: every month from the earliest event to the latest one-off event or three months ahead
+  (function () {
+    if (!events.length) return;
+    var first = events.reduce(function (m, e) { return e.start < m ? e.start : m; }, events[0].start);
+    var last = events.reduce(function (m, e) { var x = e.end.getFullYear() === 9999 ? e.start : e.end; return x > m ? x : m; }, first);
+    var horizon = new Date(Y, M + 3, 1);
+    var c = new Date(first.getFullYear(), first.getMonth(), 1);
+    var stop = events.some(function (e) { return e.weekly; }) && horizon > last ? horizon : last;
+    while (c <= stop) {
+      var a = c, b = lastOfMonth(c.getFullYear(), c.getMonth());
+      if (events.some(function (e) { return placeIn(e, a, b); })) {
+        var opt = document.createElement("option");
+        opt.value = monthKey(c);
+        opt.textContent = MONTHS[c.getMonth()] + " " + c.getFullYear();
+        select.appendChild(opt);
+      }
+      c = new Date(c.getFullYear(), c.getMonth() + 1, 1);
+    }
+  })();
+
+  var state = { range: "upcoming", month: "" };
+
+  function badge(e, d) {
+    if (has(e.dateText)) return "";
+    if (!e.weekly && e.start < today && e.end >= today) return "On now";
+    if (daysBetween(today, d) === 0) return "Today";
+    if (daysBetween(today, d) === 1) return "Tomorrow";
+    return "";
+  }
+
+  function row(item) {
+    var e = item.e, d = item.d;
+    var meta = [];
+    if (e.weekly) meta.push("Every " + DAYS[e.start.getDay()]);
+    else if (e.start < e.end && !has(e.dateText)) meta.push(short(e.start) + " to " + short(e.end));
+    if (has(e.time)) meta.push(e.time);
+    if (has(e.location)) meta.push(e.location);
+    if (has(e.organiser)) meta.push("Hosted by " + e.organiser);
+    var b = badge(e, d);
+    var action = e.id
+      ? '<a class="cta" href="#' + e.id + '" aria-label="Find out more about ' + esc(e.name) + '">Find out more <span class="arrow" aria-hidden="true">→</span></a>'
+      : has(e.link)
+      ? '<a class="cta" href="' + esc(e.link) + '" target="_blank" rel="noopener" aria-label="Find out more about ' + esc(e.name) + '">Find out more <span class="arrow" aria-hidden="true">→</span></a>'
+      : '<span class="soon">More info coming soon</span>';
+    var plaque = has(e.dateText)
+      ? '<div class="date text"><span class="mon">' + MONTHS[d.getMonth()].slice(0, 3) + '</span><span class="when">' + esc(e.dateText) + '</span></div>'
+      : '<div class="date" aria-label="' + DAYS[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()] + '">' +
+        '<span class="mon" aria-hidden="true">' + MONTHS[d.getMonth()].slice(0, 3) + '</span>' +
+        '<span class="day" aria-hidden="true">' + d.getDate() + '</span>' +
+        '<span class="dow" aria-hidden="true">' + DAYS[d.getDay()].slice(0, 3) + '</span></div>';
+    return '<article class="event">' + plaque +
+      '<div class="info">' +
+        (b ? '<span class="badge">' + b + '</span>' : '') +
+        '<h3>' + esc(e.name) + '</h3>' +
+        (meta.length ? '<div class="meta">' + meta.map(function (x) { return '<span>' + esc(x) + '</span>'; }).join("") + '</div>' : '') +
+        (has(e.teaser) ? '<p class="teaser">' + esc(e.teaser) + '</p>' : '') +
+      '</div>' +
+      '<div class="action">' + action + '</div>' +
+    '</article>';
+  }
+
+  function render() {
+    var shown = [];
+    if (state.range === "past" && !state.month) {
+      // Finished one-offs, and weekly series that have ended, newest first
+      events.forEach(function (e) {
+        if (e.end < today) shown.push({ e: e, d: e.weekly ? addDays(e.start, Math.floor(daysBetween(e.start, e.end) / 7) * 7) : e.start });
+      });
+      shown.sort(function (x, y) { return y.d - x.d; });
+    } else {
+      var w;
+      if (state.month) {
+        var p = state.month.split("-");
+        w = [new Date(+p[0], +p[1] - 1, 1), lastOfMonth(+p[0], +p[1] - 1)];
+      } else {
+        w = windows[state.range];
+      }
+      events.forEach(function (e) { var d = placeIn(e, w[0], w[1]); if (d) shown.push({ e: e, d: d }); });
+      shown.sort(function (x, y) { return x.d - y.d; });
+    }
+
+    tabs.forEach(function (t) { t.setAttribute("aria-pressed", String(!state.month && t.dataset.range === state.range)); });
+
+    var label = state.month ? "in " + select.options[select.selectedIndex].textContent : labels[state.range];
+    countEl.textContent = shown.length ? (shown.length === 1 ? "One event " : shown.length + " events ") + label : "";
+
+    if (!shown.length) {
+      list.className = "";
+      list.innerHTML = '<div class="empty"><p>Nothing ' + esc(label) + ' just yet.</p>' +
+        '<button class="tab" type="button" id="show-all" aria-pressed="true">See everything upcoming</button></div>';
+      document.getElementById("show-all").onclick = function () { state = { range: "upcoming", month: "" }; select.value = ""; render(); };
+      return;
+    }
+
+    var groups = [], byKey = {};
+    shown.forEach(function (item) {
+      var k = monthKey(item.d);
+      if (!byKey[k]) { byKey[k] = { title: MONTHS[item.d.getMonth()] + " " + item.d.getFullYear(), items: [] }; groups.push(byKey[k]); }
+      byKey[k].items.push(item);
+    });
+    list.className = state.range === "past" && !state.month ? "past" : "";
+    list.innerHTML = groups.map(function (g) {
+      return '<section class="month"><h2>' + g.title + '</h2><div class="grid">' + g.items.map(row).join("") + '</div></section>';
+    }).join("");
+  }
+
+  tabs.forEach(function (t) {
+    t.addEventListener("click", function () { state = { range: t.dataset.range, month: "" }; select.value = ""; render(); });
+  });
+  select.addEventListener("change", function () {
+    state.month = select.value;
+    if (!state.month) state.range = "upcoming";
+    render();
+  });
+
+  // Event pages: the address ends in #event-id, so each one can be bookmarked and shared, and Back works
+  var hub = document.getElementById("hub");
+  var detail = document.getElementById("detail");
+  var logoSrc = document.querySelector(".logo").getAttribute("src");
+
+  function whenText(e) {
+    if (has(e.dateText)) return e.dateText;
+    if (e.weekly) return "Every " + DAYS[e.start.getDay()];
+    if (e.start < e.end) return short(e.start) + " to " + short(e.end) + " " + e.end.getFullYear();
+    return DAYS[e.start.getDay()] + " " + e.start.getDate() + " " + MONTHS[e.start.getMonth()] + " " + e.start.getFullYear();
+  }
+
+  function showDetail(e) {
+    var facts = [["When", whenText(e)]];
+    if (has(e.time)) facts.push(["Time", e.time]);
+    if (has(e.location)) facts.push(["Where", e.location]);
+    if (has(e.organiser)) facts.push(["Hosted by", e.organiser]);
+    var actions = [];
+    if (has(e.buttonLink)) actions.push('<a class="cta" href="' + esc(e.buttonLink) + '" target="_blank" rel="noopener">' + esc(has(e.buttonText) ? e.buttonText : "Find out more") + ' <span class="arrow" aria-hidden="true">→</span></a>');
+    if (has(e.link)) actions.push('<a class="cta" href="' + esc(e.link) + '" target="_blank" rel="noopener">Visit the event page <span class="arrow" aria-hidden="true">→</span></a>');
+    detail.innerHTML =
+      '<a class="back" href="#">← All events</a>' +
+      '<header class="detail-head">' +
+        '<img class="logo" src="' + esc(logoSrc) + '" alt="Bvlgari Hotel London" width="900" height="220">' +
+        '<p class="eyebrow">What\'s On</p>' +
+        '<h1>' + esc(e.name) + '</h1>' +
+        document.querySelector(".ornament").outerHTML +
+      '</header>' +
+      '<dl class="facts">' + facts.map(function (f) { return '<div><dt>' + f[0] + '</dt><dd>' + esc(f[1]) + '</dd></div>'; }).join("") + '</dl>' +
+      (has(e.highlight) ? '<p class="highlight">' + esc(e.highlight) + '</p>' : '') +
+      '<div class="detail-body">' + e.details.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join("") + '</div>' +
+      (actions.length ? '<div class="detail-actions">' + actions.join("") + '</div>' : '') +
+      (e.photos.length ? '<section class="gallery"><h2>' + esc(has(e.photosTitle) ? e.photosTitle : "Gallery") + '</h2><div class="photos">' +
+        e.photos.map(function (src, i) {
+          return '<button class="photo" type="button" data-i="' + i + '" aria-label="View photo ' + (i + 1) + ' of ' + e.photos.length + '">' +
+            '<img src="' + esc(src) + '" alt="" loading="' + (i < 4 ? "eager" : "lazy") + '" width="1600" height="1067"></button>';
+        }).join("") + '</div></section>' : '') +
+      '<div class="detail-foot"><a class="back" href="#">← Back to all events</a></div>';
+    document.title = e.name + " · What's On";
+    Array.prototype.forEach.call(detail.querySelectorAll(".photo"), function (b) {
+      b.addEventListener("click", function () { openLightbox(e.photos, +b.dataset.i, b); });
+    });
+  }
+
+  // Full-screen photo viewer: arrows or swipe-free buttons to move, Esc or × to close
+  var lb = null, lbPhotos = [], lbIndex = 0, lbReturn = null;
+  function openLightbox(photos, i, from) {
+    lbPhotos = photos; lbIndex = i; lbReturn = from;
+    if (!lb) {
+      lb = document.createElement("div");
+      lb.className = "lightbox"; lb.setAttribute("role", "dialog"); lb.setAttribute("aria-modal", "true"); lb.setAttribute("aria-label", "Photo viewer");
+      lb.innerHTML = '<img alt=""><button class="lb-btn lb-close" type="button" aria-label="Close">×</button>' +
+        '<button class="lb-btn lb-prev" type="button" aria-label="Previous photo">‹</button>' +
+        '<button class="lb-btn lb-next" type="button" aria-label="Next photo">›</button><div class="lb-count"></div>';
+      lb.querySelector(".lb-close").onclick = closeLightbox;
+      lb.querySelector(".lb-prev").onclick = function (ev) { ev.stopPropagation(); stepLightbox(-1); };
+      lb.querySelector(".lb-next").onclick = function (ev) { ev.stopPropagation(); stepLightbox(1); };
+      lb.addEventListener("click", function (ev) { if (ev.target === lb) closeLightbox(); });
+      document.body.appendChild(lb);
+    }
+    lb.hidden = false; showLightbox(); lb.querySelector(".lb-close").focus();
+  }
+  function showLightbox() {
+    lb.querySelector("img").src = lbPhotos[lbIndex];
+    lb.querySelector(".lb-count").textContent = (lbIndex + 1) + " / " + lbPhotos.length;
+  }
+  function stepLightbox(n) { lbIndex = (lbIndex + n + lbPhotos.length) % lbPhotos.length; showLightbox(); }
+  function closeLightbox() { if (lb) lb.hidden = true; if (lbReturn) lbReturn.focus(); }
+  document.addEventListener("keydown", function (ev) {
+    if (!lb || lb.hidden) return;
+    if (ev.key === "Escape") closeLightbox();
+    else if (ev.key === "ArrowLeft") stepLightbox(-1);
+    else if (ev.key === "ArrowRight") stepLightbox(1);
+  });
+
+  function route() {
+    var id = decodeURIComponent(location.hash.replace(/^#/, ""));
+    var e = byId[id];
+    if (lb) lb.hidden = true;
+    if (e) { showDetail(e); hub.hidden = true; detail.hidden = false; window.scrollTo(0, 0); }
+    else { detail.hidden = true; hub.hidden = false; document.title = "What's On"; }
+  }
+  window.addEventListener("hashchange", route);
+
+  render();
+  route();
+})();
+</script>
+</body>
+</html>
