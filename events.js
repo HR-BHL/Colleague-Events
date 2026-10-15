@@ -63,19 +63,22 @@ const EVENTS = [
   {
     name: "Midweek Walks",
     date: "2026-10-14",
-    endDate: "",
+    endDate: "2026-10-28",
     dateText: "",
     repeat: "weekly",
     time: "1:00 PM",
     location: "Loading bay",
     organiser: "La Dolce Vita",
-    teaser: "A relaxed walk every Wednesday to stretch your legs and catch up with colleagues.",
+    teaser: "A relaxed walk every Wednesday to stretch your legs and catch up with colleagues. Weather permitting.",
     link: "",
     details: [
       "Join us every Wednesday at 1:00 PM for a relaxed walk with colleagues from across the hotel. We meet in the loading bay and head off together.",
-      "Water bottles and protein bars are provided, so just bring yourself and comfortable shoes."
+      "Water bottles and protein bars are provided, so just bring yourself and comfortable shoes.",
+      "Coming up this month:",
+      "• Wednesday 21 October, 1:00 PM",
+      "• Wednesday 28 October, 1:00 PM"
     ],
-    highlight: "This week's treat: ice cream! The ice cream machine will be in the loading bay, so grab one before we set off.",
+    highlight: "All walks are weather permitting. If it rains, we'll move the walk to another day.",
     buttonText: "",
     buttonLink: ""
   },
