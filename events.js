@@ -61,24 +61,40 @@ const EVENTS = [
     buttonLink: ""
   },
   {
-    name: "Midweek Walks",
-    date: "2026-10-14",
-    endDate: "2026-10-28",
+    name: "Midweek Walk",
+    date: "2026-10-21",
+    endDate: "",
     dateText: "",
-    repeat: "weekly",
+    repeat: "",
     time: "1:00 PM",
     location: "Loading bay",
     organiser: "La Dolce Vita",
-    teaser: "A relaxed walk every Wednesday to stretch your legs and catch up with colleagues. Weather permitting.",
+    teaser: "A relaxed walk to stretch your legs and catch up with colleagues. Weather permitting.",
     link: "",
     details: [
-      "Join us every Wednesday at 1:00 PM for a relaxed walk with colleagues from across the hotel. We meet in the loading bay and head off together.",
-      "Water bottles and protein bars are provided, so just bring yourself and comfortable shoes.",
-      "Coming up this month:",
-      "• Wednesday 21 October, 1:00 PM",
-      "• Wednesday 28 October, 1:00 PM"
+      "Join us on Wednesday 21 October at 1:00 PM for a relaxed walk with colleagues from across the hotel. We meet in the loading bay and head off together.",
+      "Water bottles and protein bars are provided, so just bring yourself and comfortable shoes."
     ],
-    highlight: "All walks are weather permitting. If it rains, we'll move the walk to another day.",
+    highlight: "This walk is weather permitting. If it rains, we'll move it to another day.",
+    buttonText: "",
+    buttonLink: ""
+  },
+  {
+    name: "Midweek Walk",
+    date: "2026-10-28",
+    endDate: "",
+    dateText: "",
+    repeat: "",
+    time: "1:00 PM",
+    location: "Loading bay",
+    organiser: "La Dolce Vita",
+    teaser: "A relaxed walk to stretch your legs and catch up with colleagues. Weather permitting.",
+    link: "",
+    details: [
+      "Join us on Wednesday 28 October at 1:00 PM for a relaxed walk with colleagues from across the hotel. We meet in the loading bay and head off together.",
+      "Water bottles and protein bars are provided, so just bring yourself and comfortable shoes."
+    ],
+    highlight: "This walk is weather permitting. If it rains, we'll move it to another day.",
     buttonText: "",
     buttonLink: ""
   },
