@@ -267,7 +267,10 @@
 <article id="detail" class="detail" hidden></article>
 </div>
 
-<script src="events.js"></script>
+<script>
+  // Always fetch the newest event list, so changes show without a hard refresh
+  document.write('<script src="events.js?v=' + Date.now() + '"><\/script>');
+</script>
 <script>
 (function () {
   var list = document.getElementById("list");
