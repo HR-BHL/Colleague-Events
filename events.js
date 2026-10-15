@@ -30,11 +30,12 @@
   link        Optional. The web address of a separate page for the event.
   details     Optional. The text for the event's own page. Each paragraph goes in its own "quote marks",
               separated by commas, all inside [ square brackets ]. Leave as [] for none.
+              Start a line with "• " to make it a bullet point.
   highlight   Optional. One sentence shown in a gold frame on the event page, e.g. a special treat or a deadline.
   buttonText  Optional. The words on an extra button on the event page, e.g. "Nominate a colleague".
   buttonLink  Optional. Where that extra button goes.
-  photos      Optional. Photos for the event's own page, e.g. ["photos/q3-01.jpg", "photos/q3-02.jpg"].
-              Upload the photos into the "photos" folder first. The first photo is shown large. Leave as [] for none.
+  photos      Optional. Photos for the event's own page, e.g. ["q3-01.jpg", "q3-02.jpg"].
+              Upload the photos to GitHub next to index.html first. The first photo is shown large. Leave as [] for none.
   photosTitle Optional. A heading above the photos, e.g. "Moments from our Q2 celebration".
 
   Keep the quote marks "like this" around every value.
@@ -80,7 +81,7 @@ const EVENTS = [
   },
   {
     name: "Quarterly Celebrations: Q3",
-    date: "2026-10-21",
+    date: "2026-10-22",
     endDate: "",
     dateText: "",
     repeat: "",
@@ -100,10 +101,10 @@ const EVENTS = [
     buttonLink: "https://www.surveymonkey.com/r/NCGGR75",
     photosTitle: "Moments from our Q2 celebration",
     photos: [
-      "photos/q3-10.jpg",
-      "photos/q3-01.jpg", "photos/q3-04.jpg", "photos/q3-05.jpg",
-      "photos/q3-02.jpg", "photos/q3-03.jpg", "photos/q3-06.jpg",
-      "photos/q3-07.jpg", "photos/q3-08.jpg", "photos/q3-09.jpg"
+      "q3-10.jpg",
+      "q3-01.jpg", "q3-04.jpg", "q3-05.jpg",
+      "q3-02.jpg", "q3-03.jpg", "q3-06.jpg",
+      "q3-07.jpg", "q3-08.jpg", "q3-09.jpg"
     ]
   },
   {
@@ -139,19 +140,30 @@ const EVENTS = [
     buttonLink: ""
   },
   {
-    name: "Halloween Kids Party",
+    name: "Children's Halloween Movie Party",
     date: "2026-10-30",
     endDate: "",
-    dateText: "This month",
+    dateText: "",
     repeat: "",
-    time: "",
-    location: "",
+    time: "1:00 PM",
+    location: "Bvlgari Cinema",
     organiser: "",
-    teaser: "Costumes, treats and games for our colleagues' little ones.",
+    teaser: "A spooktacular afternoon of film, treats and fun for colleagues' children aged 0 to 12.",
     link: "",
-    details: [],
-    highlight: "",
-    buttonText: "",
-    buttonLink: ""
+    details: [
+      "A spooktacular afternoon awaits! We are delighted to invite the children of our colleagues, aged 0 to 12, to a special Children's Halloween Movie Party at Bulgari Hotel London.",
+      "Join us for a fun-filled Halloween celebration in our private cinema, where the little ones can enjoy a family-friendly Halloween movie along with plenty of treats and activities.",
+      "• A Halloween movie screening in our private cinema",
+      "• Popcorn and delicious snacks",
+      "• A Halloween ice cream station where children can decorate their own ice cream with spooky toppings and sprinkles",
+      "• Face painting",
+      "• Balloon fun and entertainment",
+      "Children are encouraged to come dressed in their favourite Halloween costumes if they wish!",
+      "Please note that all children must be accompanied by an adult throughout the event.",
+      "We look forward to welcoming you and your little ones for an afternoon of Halloween magic, movie fun and plenty of sweet treats!"
+    ],
+    highlight: "Please RSVP by Tuesday 20 October, letting us know how many children will be attending.",
+    buttonText: "RSVP for the party",
+    buttonLink: "https://forms.cloud.microsoft/e/VCTYmtG1MX"
   },
 ];

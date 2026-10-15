@@ -191,6 +191,9 @@
   .highlight::before { content: ""; position: absolute; inset: 5px; border: 1px solid var(--line); pointer-events: none; }
   .detail-body { margin-top: 32px; }
   .detail-body p { margin: 0 0 18px; font-size: 1.08rem; line-height: 1.75; color: var(--muted); }
+  .bullets { list-style: none; margin: 4px 0 24px; padding: 20px 26px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); display: grid; gap: 10px; }
+  .bullets li { position: relative; padding-left: 26px; font-size: 1.05rem; line-height: 1.55; color: var(--ink); }
+  .bullets li::before { content: ""; position: absolute; left: 2px; top: 0.55em; width: 7px; height: 7px; background: var(--gold); transform: rotate(45deg); }
   .detail-actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 34px; }
   .detail-actions .cta { white-space: normal; text-align: center; }
   .detail-foot { text-align: center; margin-top: 52px; padding-top: 24px; border-top: 1px solid var(--line); }
@@ -466,6 +469,18 @@
     return DAYS[e.start.getDay()] + " " + e.start.getDate() + " " + MONTHS[e.start.getMonth()] + " " + e.start.getFullYear();
   }
 
+  // Paragraphs, with lines starting "• " grouped into a bullet list
+  function bodyHtml(lines) {
+    var out = "", inList = false;
+    lines.forEach(function (line) {
+      var m = /^\s*[•\-*]\s+(.*)$/.exec(line);
+      if (m && !inList) { out += '<ul class="bullets">'; inList = true; }
+      if (!m && inList) { out += '</ul>'; inList = false; }
+      out += m ? '<li>' + esc(m[1]) + '</li>' : '<p>' + esc(line) + '</p>';
+    });
+    return out + (inList ? '</ul>' : '');
+  }
+
   function showDetail(e) {
     var facts = [["When", whenText(e)]];
     if (has(e.time)) facts.push(["Time", e.time]);
@@ -484,7 +499,7 @@
       '</header>' +
       '<dl class="facts">' + facts.map(function (f) { return '<div><dt>' + f[0] + '</dt><dd>' + esc(f[1]) + '</dd></div>'; }).join("") + '</dl>' +
       (has(e.highlight) ? '<p class="highlight">' + esc(e.highlight) + '</p>' : '') +
-      '<div class="detail-body">' + e.details.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join("") + '</div>' +
+      '<div class="detail-body">' + bodyHtml(e.details) + '</div>' +
       (actions.length ? '<div class="detail-actions">' + actions.join("") + '</div>' : '') +
       (e.photos.length ? '<section class="gallery"><h2>' + esc(has(e.photosTitle) ? e.photosTitle : "Gallery") + '</h2><div class="photos">' +
         e.photos.map(function (src, i) {
