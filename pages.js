@@ -13,7 +13,7 @@
               Start a paragraph with "• " to make it a bullet point.
               Text starting with "[" is shown as a placeholder until you replace it.
               A section can also have:
-                members     A list of people shown as cards: { name: "Laura", role: "People & Culture Coordinator" },
+                members     A list of people shown as cards: { name: "Laura Radut", role: "People & Culture Coordinator" },
                 buttonText  The words on a button at the end of that section.
                 buttonLink  Where that button goes. Leave as "" to hide the button.
   photos      Optional. Photos uploaded next to index.html, e.g. ["ldv-01.jpg"]. The first is shown large.
@@ -35,14 +35,13 @@ const PAGES = [
         heading: "Meet the committee",
         text: [],
         members: [
-          { name: "Laura", role: "People & Culture Coordinator" },
+          { name: "Laura Radut", role: "People & Culture Coordinator" },
           { name: "Aris Ciurar", role: "Bvlgari Lounge Manager" },
           { name: "Andras Niemi", role: "Stewarding Manager" },
           { name: "Andrei Prigoreanu", role: "Sette Supervisor" },
           { name: "Olena Lohunova", role: "Spa Attendant" },
           { name: "Richard Burton", role: "Spa Membership Manager" },
           { name: "Yessenia Porras", role: "Reservations Agent" },
-          { name: "Misato Satake", role: "Reservations Agent" },
           { name: "Anmoljit Nirwan", role: "Finance Assistant" },
           { name: "Artur Bendig", role: "Bellman" },
           { name: "Rohit Patil", role: "Engineering Supervisor" },
