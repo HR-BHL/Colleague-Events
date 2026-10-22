@@ -243,7 +243,7 @@
   .page-links a:focus-visible { outline: 1px solid var(--gold); outline-offset: 4px; }
 
   /* Extra pages (About La Dolce Vita) */
-  .page-intro { margin: 28px auto 0; max-width: 34ch; text-align: center; font: italic 500 1.5rem/1.45 var(--font-display); color: var(--ink); text-wrap: balance; }
+  .page-intro { margin: 28px auto 0; max-width: 44ch; text-align: center; font: italic 500 1.5rem/1.45 var(--font-display); color: var(--ink); text-wrap: balance; }
   .page-section { margin-top: 44px; }
   .page-section h2 {
     display: flex; align-items: center; gap: 18px; margin: 0 0 18px;
@@ -252,6 +252,14 @@
   .page-section h2::after { content: ""; flex: 1; height: 1px; background: var(--line); }
   .page-section p { margin: 0 0 16px; font-size: 1.08rem; line-height: 1.75; color: var(--muted); }
   .placeholder { font-style: italic; color: var(--gold) !important; opacity: .8; }
+  .members { list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; }
+  .members li { position: relative; padding: 26px 16px 22px; text-align: center; background: var(--surface); border: 1px solid var(--line); }
+  .members li::before { content: ""; display: block; width: 6px; height: 6px; margin: 0 auto 14px; background: var(--gold-soft); transform: rotate(45deg); }
+  .m-name { display: block; font: 600 1.3rem/1.2 var(--font-display); color: var(--ink); }
+  .m-role { display: block; margin-top: 8px; font: 500 0.68rem/1.5 var(--font-caps); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .page-section .detail-actions { margin-top: 8px; }
+  @media (max-width: 560px) { .members { grid-template-columns: 1fr 1fr; gap: 8px; } .members li { padding: 20px 10px 16px; } .m-name { font-size: 1.15rem; } .m-role { letter-spacing: 0.1em; } }
+  .page-note { margin: 52px 0 0; text-align: center; font: italic 500 1.25rem/1.5 var(--font-display); color: var(--ink); }
   .org-events { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
   .org-events li { border-bottom: 1px solid var(--line); }
   .org-events a, .org-events span.row {
@@ -561,11 +569,18 @@
       (has(p.intro) ? '<p class="page-intro' + (/^\s*\[/.test(p.intro) ? ' placeholder' : '') + '">' + esc(p.intro) + '</p>' : '') +
       (Array.isArray(p.sections) ? p.sections : []).map(function (sec) {
         var lines = Array.isArray(sec.text) ? sec.text.filter(has) : (has(sec.text) ? [sec.text] : []);
-        return '<section class="page-section">' + (has(sec.heading) ? '<h2>' + esc(sec.heading) + '</h2>' : '') + textHtml(lines) + '</section>';
+        var members = Array.isArray(sec.members) ? sec.members.filter(function (m) { return m && has(m.name); }) : [];
+        return '<section class="page-section">' + (has(sec.heading) ? '<h2>' + esc(sec.heading) + '</h2>' : '') + textHtml(lines) +
+          (members.length ? '<ul class="members">' + members.map(function (m) {
+            return '<li><span class="m-name">' + esc(m.name) + '</span>' + (has(m.role) ? '<span class="m-role">' + esc(m.role) + '</span>' : '') + '</li>';
+          }).join("") + '</ul>' : '') +
+          (has(sec.buttonLink) ? '<div class="detail-actions"><a class="cta" href="' + esc(sec.buttonLink) + '" target="_blank" rel="noopener">' + esc(has(sec.buttonText) ? sec.buttonText : "Find out more") + ' <span class="arrow" aria-hidden="true">→</span></a></div>' : '') +
+          '</section>';
       }).join("") +
       upcoming +
       (has(p.buttonLink) ? '<div class="detail-actions"><a class="cta" href="' + esc(p.buttonLink) + '" target="_blank" rel="noopener">' + esc(has(p.buttonText) ? p.buttonText : "Find out more") + ' <span class="arrow" aria-hidden="true">→</span></a></div>' : '') +
       galleryHtml(photos, p.photosTitle) +
+      (has(p.note) ? '<p class="page-note">' + esc(p.note) + '</p>' : '') +
       '<div class="detail-foot"><a class="back" href="#">← Back to all events</a></div>';
     document.title = p.title + " · What's On";
     Array.prototype.forEach.call(detail.querySelectorAll(".photo"), function (b) {

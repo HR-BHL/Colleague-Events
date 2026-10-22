@@ -11,7 +11,11 @@
   intro       One or two sentences shown large under the title.
   sections    The main text. Each section has a heading and paragraphs.
               Start a paragraph with "• " to make it a bullet point.
-              Text starting with "[" is shown as a grey placeholder until you replace it.
+              Text starting with "[" is shown as a placeholder until you replace it.
+              A section can also have:
+                members     A list of people shown as cards: { name: "Laura", role: "People & Culture Coordinator" },
+                buttonText  The words on a button at the end of that section.
+                buttonLink  Where that button goes. Leave as "" to hide the button.
   photos      Optional. Photos uploaded next to index.html, e.g. ["ldv-01.jpg"]. The first is shown large.
   photosTitle Optional. A heading above the photos.
   organiser   Optional. Events in events.js with this exact organiser are listed on the page automatically.
@@ -23,34 +27,42 @@ const PAGES = [
   {
     id: "la-dolce-vita",
     linkText: "About La Dolce Vita",
-    eyebrow: "About us",
+    eyebrow: "The Committee",
     title: "La Dolce Vita",
-    intro: "[One or two sentences that sum up La Dolce Vita, for example what the name means to you and why the group exists.]",
+    intro: "A team of colleagues from across the hotel, brought together to plan and celebrate the moments that make Bvlgari Hotel London a truly wonderful place to work — from cultural traditions and team events to the little touches that remind us we are part of something special.",
     sections: [
       {
-        heading: "Who we are",
-        text: [
-          "[Who La Dolce Vita is: when it started, who is part of it, and who it is for.]"
+        heading: "Meet the committee",
+        text: [],
+        members: [
+          { name: "Laura", role: "People & Culture Coordinator" },
+          { name: "Aris Ciurar", role: "Bvlgari Lounge Manager" },
+          { name: "Andras Niemi", role: "Stewarding Manager" },
+          { name: "Andrei Prigoreanu", role: "Sette Supervisor" },
+          { name: "Olena Lohunova", role: "Spa Attendant" },
+          { name: "Richard Burton", role: "Spa Membership Manager" },
+          { name: "Yessenia Porras", role: "Reservations Agent" },
+          { name: "Misato Satake", role: "Reservations Agent" },
+          { name: "Anmoljit Nirwan", role: "Finance Assistant" },
+          { name: "Artur Bendig", role: "Bellman" },
+          { name: "Rohit Patil", role: "Engineering Supervisor" },
+          { name: "Julia Gsell", role: "Guest Relations Manager" }
         ]
       },
       {
-        heading: "What we do",
+        heading: "Share an idea",
         text: [
-          "We organise moments that bring colleagues together across the hotel, like our Midweek Walks.",
-          "[Anything else La Dolce Vita runs or looks after, one point per line.]"
-        ]
-      },
-      {
-        heading: "Get involved",
-        text: [
-          "[How colleagues can join in, suggest an idea or get in touch with the team.]"
-        ]
+          "La Dolce Vita belongs to everyone. If there is an event, tradition, or moment you would love to see come to life — tell us. Every voice matters."
+        ],
+        buttonText: "Submit your idea",
+        buttonLink: ""
       }
     ],
     photos: [],
     photosTitle: "",
     organiser: "La Dolce Vita",
     buttonText: "",
-    buttonLink: ""
+    buttonLink: "",
+    note: "Questions? Find Laura in the People & Culture office."
   },
 ];
