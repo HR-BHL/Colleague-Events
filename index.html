@@ -232,15 +232,21 @@
   @media (prefers-reduced-motion: reduce) { .photo img { transition: none; } .photo:hover img { transform: none; } }
 
   /* Links to extra pages, under the date in the header */
-  .page-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 28px; margin-top: 22px; }
+  .page-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 28px; margin-top: 30px; }
   .page-links:empty { display: none; }
   .page-links a {
-    font: 500 0.8rem/1 var(--font-caps); letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--ink); text-decoration: none; padding: 12px 18px 11px; border: 1px solid var(--gold-soft);
+    display: inline-flex; align-items: center; gap: 14px;
+    font: 600 0.95rem/1 var(--font-caps); letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold); background: var(--surface); text-decoration: none; padding: 18px 30px 17px;
+    border: 1px solid var(--gold); outline: 1px solid var(--gold-soft); outline-offset: 4px;
     transition: background .25s, color .25s, border-color .25s;
   }
-  .page-links a:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-  .page-links a:focus-visible { outline: 1px solid var(--gold); outline-offset: 4px; }
+  .page-links a::before { content: ""; width: 7px; height: 7px; background: currentColor; transform: rotate(45deg); flex: none; }
+  .page-links a .arrow { transition: transform .25s; }
+  .page-links a:hover { background: var(--gold); color: var(--bg); }
+  .page-links a:hover .arrow { transform: translateX(4px); }
+  .page-links a:focus-visible { outline: 2px solid var(--gold); outline-offset: 5px; }
+  @media (max-width: 560px) { .page-links a { font-size: 0.82rem; letter-spacing: 0.16em; padding: 16px 20px 15px; } }
 
   /* Extra pages (About La Dolce Vita) */
   .page-intro { margin: 28px auto 0; max-width: 44ch; text-align: center; font: italic 500 1.5rem/1.45 var(--font-display); color: var(--ink); text-wrap: balance; }
@@ -373,7 +379,7 @@
   pageList.forEach(function (p) { if (p && has(p.id) && !byId[p.id]) pages[p.id] = p; });
   document.getElementById("page-links").innerHTML = pageList
     .filter(function (p) { return pages[p.id] === p && has(p.linkText); })
-    .map(function (p) { return '<a href="#' + esc(p.id) + '">' + esc(p.linkText) + '</a>'; }).join("");
+    .map(function (p) { return '<a href="#' + esc(p.id) + '">' + esc(p.linkText) + ' <span class="arrow" aria-hidden="true">→</span></a>'; }).join("");
 
   // For a date window [a, b], return the date to show this event under, or null if it doesn't fall in the window.
   // One-off events show under their start date; weekly events show once, under their next date in the window.
