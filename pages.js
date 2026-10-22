@@ -53,8 +53,8 @@ const PAGES = [
         text: [
           "La Dolce Vita belongs to everyone. If there is an event, tradition, or moment you would love to see come to life — tell us. Every voice matters."
         ],
-        buttonText: "Submit your idea",
-        buttonLink: ""
+        buttonText: "Share your idea",
+        buttonLink: "https://forms.cloud.microsoft/e/yJ1SWiPdTM"
       }
     ],
     photos: [],
