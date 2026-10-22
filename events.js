@@ -127,22 +127,6 @@ const EVENTS = [
     ]
   },
   {
-    name: "Walk for Wellbeing",
-    date: "2026-10-25",
-    endDate: "",
-    dateText: "",
-    repeat: "",
-    time: "",
-    location: "",
-    organiser: "",
-    teaser: "Step out together for fresh air, good company and a boost for body and mind.",
-    link: "https://hr-bhl.github.io/walk-for-wellbeing/",
-    details: [],
-    highlight: "",
-    buttonText: "",
-    buttonLink: ""
-  },
-  {
     name: "Halloween Movie Screening",
     date: "2026-10-29",
     endDate: "",
@@ -159,30 +143,19 @@ const EVENTS = [
     buttonLink: ""
   },
   {
-    name: "Children's Halloween Movie Party",
-    date: "2026-10-30",
-    endDate: "",
-    dateText: "",
+    name: "Christmas Celebrations",
+    date: "2026-12-01",
+    endDate: "2026-12-31",
+    dateText: "Coming soon",
     repeat: "",
-    time: "1:00 PM",
-    location: "Bvlgari Cinema",
-    organiser: "",
-    teaser: "A spooktacular afternoon of film, treats and fun for colleagues' children aged 0 to 12.",
+    time: "",
+    location: "",
+    organiser: "La Dolce Vita",
+    teaser: "Save the date: our Christmas celebrations are coming this December. Watch this space!",
     link: "",
-    details: [
-      "A spooktacular afternoon awaits! We are delighted to invite the children of our colleagues, aged 0 to 12, to a special Children's Halloween Movie Party at Bulgari Hotel London.",
-      "Join us for a fun-filled Halloween celebration in our private cinema, where the little ones can enjoy a family-friendly Halloween movie along with plenty of treats and activities.",
-      "• A Halloween movie screening in our private cinema",
-      "• Popcorn and delicious snacks",
-      "• A Halloween ice cream station where children can decorate their own ice cream with spooky toppings and sprinkles",
-      "• Face painting",
-      "• Balloon fun and entertainment",
-      "Children are encouraged to come dressed in their favourite Halloween costumes if they wish!",
-      "Please note that all children must be accompanied by an adult throughout the event.",
-      "We look forward to welcoming you and your little ones for an afternoon of Halloween magic, movie fun and plenty of sweet treats!"
-    ],
-    highlight: "Please RSVP by Tuesday 20 October, letting us know how many children will be attending.",
-    buttonText: "RSVP for the party",
-    buttonLink: "https://forms.cloud.microsoft/e/VCTYmtG1MX"
+    details: [],
+    highlight: "",
+    buttonText: "",
+    buttonLink: ""
   },
 ];
