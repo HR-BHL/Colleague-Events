@@ -107,17 +107,17 @@ const EVENTS = [
     time: "3:00 PM",
     location: "Screening Room (B2 Level)",
     organiser: "",
-    teaser: "Come together to celebrate the achievements of Quarter 3 and vote for our Colleague and Leader of the Quarter.",
+    teaser: "Come together to celebrate the achievements of Quarter 3 and find out who our Colleague and Leader of the Quarter are.",
     link: "",
     details: [
       "Now that we have successfully completed Quarter 3, it's time to come together for our Quarterly Celebration. This is a wonderful opportunity to connect with colleagues and recognise the fantastic achievements, dedication and hard work demonstrated across the hotel.",
       "It will also be a chance to hear key updates and learn more about our plans and priorities for the quarter ahead.",
-      "As part of the celebration, we'd love you to help us recognise outstanding contributions by voting for our Colleague and Leader of the Quarter.",
+      "As part of the celebration, we'll be announcing our Colleague and Leader of the Quarter, recognising some truly outstanding contributions.",
       "We look forward to celebrating with you and recognising the many successes of the past quarter."
     ],
-    highlight: "Nominations close on Friday 16 October at 12:00 PM, so please submit yours before then.",
-    buttonText: "Nominate for Colleague and Leader of Q3",
-    buttonLink: "https://www.surveymonkey.com/r/NCGGR75",
+    highlight: "Nominations are now closed. Thank you to everyone who voted! Come along to find out who our Colleague and Leader of the Quarter are.",
+    buttonText: "",
+    buttonLink: "",
     photosTitle: "Moments from our Q2 celebration",
     photos: [
       "q3-10.jpg",
