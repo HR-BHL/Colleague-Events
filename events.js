@@ -143,6 +143,22 @@ const EVENTS = [
     buttonLink: ""
   },
   {
+    name: "International Men's Day",
+    date: "2026-11-01",
+    endDate: "2026-11-30",
+    dateText: "Coming soon",
+    repeat: "",
+    time: "",
+    location: "",
+    organiser: "",
+    teaser: "Celebrating the men in our team and shining a light on men's health and wellbeing.",
+    link: "",
+    details: [],
+    highlight: "",
+    buttonText: "",
+    buttonLink: ""
+  },
+  {
     name: "Christmas Celebrations",
     date: "2026-12-01",
     endDate: "2026-12-31",
@@ -150,8 +166,8 @@ const EVENTS = [
     repeat: "",
     time: "",
     location: "",
-    organiser: "La Dolce Vita",
-    teaser: "Save the date: our Christmas celebrations are coming this December. Watch this space!",
+    organiser: "",
+    teaser: "Our Christmas celebrations are coming this December. Watch this space!",
     link: "",
     details: [],
     highlight: "",
