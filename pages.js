@@ -26,7 +26,7 @@
 const PAGES = [
   {
     id: "la-dolce-vita",
-    linkText: "About La Dolce Vita",
+    linkText: "La Dolce Vita Committee",
     eyebrow: "The Committee",
     title: "La Dolce Vita",
     intro: "A team of colleagues from across the hotel, brought together to plan and celebrate the moments that make Bvlgari Hotel London a truly wonderful place to work — from cultural traditions and team events to the little touches that remind us we are part of something special.",
