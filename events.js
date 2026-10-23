@@ -127,20 +127,30 @@ const EVENTS = [
     ]
   },
   {
-    name: "Halloween Movie Screening",
+    name: "Halloween Movie Night",
     date: "2026-10-29",
     endDate: "",
-    dateText: "This month",
+    dateText: "",
     repeat: "",
-    time: "",
-    location: "",
-    organiser: "",
-    teaser: "Settle in with colleagues for a spooky film night.",
+    time: "5:30 PM",
+    location: "Bvlgari Cinema",
+    organiser: "La Dolce Vita",
+    teaser: "A spooktacular evening of film and treats, launching our new Colleague Cinema Club. Friends welcome!",
     link: "",
-    details: [],
-    highlight: "",
-    buttonText: "",
-    buttonLink: ""
+    details: [
+      "We are delighted to invite you to a spooktacular Halloween Movie Night, hosted by our La Dolce Vita Committee in the Bvlgari Cinema.",
+      "This special evening also marks the launch of our new Colleague Cinema Club, a monthly screening for colleagues to unwind, share a film and enjoy an evening together. Following October's Halloween feature, we will be welcoming you back for a film in November, and a festive Christmas screening in December.",
+      "• Popcorn and drinks",
+      "• Halloween sweets",
+      "• Ice cream",
+      "You choose the film! On Monday, we will be sending a short vote so you can choose which Halloween classic we screen, so please keep an eye on your inbox.",
+      "Friends are more than welcome to join you; the more, the merrier! When you RSVP, please include the full name of any guests you would like to bring, so that we can share these with Security ahead of the evening.",
+      "A screening with a purpose: each Colleague Cinema Club screening supports Save the Children, the charity Bvlgari is proud to work with. We simply ask that everyone attending contributes as little as £1, a small gesture which, together, can make a meaningful difference to children around the world. Contributions can be made by cash or card on the evening.",
+      "We look forward to welcoming you, and your friends, for an evening of Halloween thrills and cinematic treats."
+    ],
+    highlight: "Please RSVP by Tuesday 27 October, including the full names of any guests you're bringing.",
+    buttonText: "RSVP for Movie Night",
+    buttonLink: "https://forms.cloud.microsoft/e/g6v5JjmiPy"
   },
   {
     name: "International Men's Day",
