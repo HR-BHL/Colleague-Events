@@ -10,35 +10,36 @@
 <style>
   /* Layout: a centred jeweller's-catalogue masthead on ivory, quiet letterspaced filters, then events as a grid of finely framed cards grouped by month. */
   :root {
-    --bg: #fbfaf7;
-    --surface: #ffffff;
-    --ink: #14120f;
-    --muted: #3f3a33;
-    --line: #e4ddd0;
-    --gold: #7e6026;
-    --gold-soft: #cdb582;
-    --gem: #7a1f2b;
+    --bg: #fff4e8;
+    --surface: #fffcf7;
+    --ink: #2b1838;
+    --muted: #4f3b57;
+    --line: #f0d4bb;
+    --gold: #b4501a;
+    --gold-soft: #f2a35e;
+    --gem: #6b2fa0;
+    --tint: #ffe8d2;
     --font-display: "Cormorant Garamond", "Didot", "Bodoni 72", Georgia, serif;
     --font-caps: "Cinzel", "Trajan Pro", "Optima", Georgia, serif;
     --font-body: "Jost", "Futura", "Century Gothic", "Segoe UI", system-ui, sans-serif;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #0e0d0c; --surface: #171513; --ink: #f5f1ea; --muted: #d3cbbf; --line: #332e27;
-      --gold: #dcbf86; --gold-soft: #7d6a45; --gem: #e08394;
+      --bg: #1c1222; --surface: #261a2d; --ink: #fbefe2; --muted: #e2cfc4; --line: #42304a;
+      --gold: #f39a4c; --gold-soft: #8a5530; --gem: #c39be6; --tint: #33213a;
       color-scheme: dark;
     }
   }
   :root[data-theme="dark"] {
-    --bg: #0e0d0c; --surface: #171513; --ink: #f5f1ea; --muted: #d3cbbf; --line: #332e27;
-    --gold: #dcbf86; --gold-soft: #7d6a45; --gem: #e08394;
+    --bg: #1c1222; --surface: #261a2d; --ink: #fbefe2; --muted: #e2cfc4; --line: #42304a;
+    --gold: #f39a4c; --gold-soft: #8a5530; --gem: #c39be6; --tint: #33213a;
     color-scheme: dark;
   }
 
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    background: var(--bg);
+    background: var(--bg) radial-gradient(ellipse 120% 60% at 50% 0, rgba(242,163,94,.2), transparent 70%) no-repeat;
     color: var(--ink);
     font: 400 17px/1.65 var(--font-body);
     -webkit-font-smoothing: antialiased;
@@ -108,17 +109,17 @@
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 22px; margin-top: 20px; }
   .event {
     position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: 1fr auto; gap: 18px;
-    background: var(--surface); border: 1px solid var(--line); padding: 26px 24px 24px;
+    background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--gold-soft); padding: 26px 24px 24px;
     transition: border-color .25s, transform .25s;
   }
   .event::before { content: ""; position: absolute; inset: 5px; border: 1px solid transparent; pointer-events: none; transition: border-color .25s; }
-  .event:hover { border-color: var(--gold-soft); transform: translateY(-2px); }
+  .event:hover { border-color: var(--gold-soft); border-top-color: var(--gold); transform: translateY(-2px); box-shadow: 0 10px 24px -14px rgba(180,80,26,.35); }
   .event:hover::before { border-color: var(--line); }
 
   /* Engraved date plaque */
   .date {
     width: 66px; align-self: start; text-align: center; font-variant-numeric: lining-nums tabular-nums;
-    border: 1px solid var(--gold-soft); padding: 10px 0 11px;
+    border: 1px solid var(--gold-soft); background: var(--tint); padding: 10px 0 11px;
   }
   .date .mon { display: block; font: 500 0.7rem/1 var(--font-caps); letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); padding-left: 0.22em; }
   .date .day { display: block; font: 500 2.5rem/1 var(--font-display); margin: 4px 0 9px; }
@@ -140,10 +141,10 @@
   .cta {
     display: inline-flex; align-items: center; gap: 10px; white-space: nowrap;
     font: 500 0.76rem/1 var(--font-caps); letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--ink); text-decoration: none; padding: 13px 18px 12px; border: 1px solid var(--ink);
+    color: var(--gold); text-decoration: none; padding: 13px 18px 12px; border: 1px solid var(--gold);
     transition: background .25s, color .25s;
   }
-  a.cta:hover { background: var(--ink); color: var(--bg); }
+  a.cta:hover { background: var(--gold); color: var(--surface); }
   .cta .arrow { transition: transform .25s; }
   a.cta:hover .arrow { transform: translateX(3px); }
   .soon {
