@@ -147,12 +147,12 @@ const EVENTS = [
       "• Halloween sweets",
       "• Ice cream",
       "You choose the film! On Monday, we will be sending a short vote so you can choose which Halloween classic we screen, so please keep an eye on your inbox.",
-      "Friends are more than welcome to join you; the more, the merrier! When you RSVP, please include the full name of any guests you would like to bring, so that we can share these with Security ahead of the evening.",
+      "Friends are more than welcome to join you; the more, the merrier! When you book, please include the full name of any guests you would like to bring, so that we can share these with Security ahead of the evening.",
       "A screening with a purpose: each Colleague Cinema Club screening supports Save the Children, the charity Bvlgari is proud to work with. We simply ask that everyone attending contributes as little as £1, a small gesture which, together, can make a meaningful difference to children around the world. Contributions can be made by cash or card on the evening.",
       "We look forward to welcoming you, and your friends, for an evening of Halloween thrills and cinematic treats."
     ],
-    highlight: "Please RSVP by Tuesday 27 October, including the full names of any guests you're bringing.",
-    buttonText: "RSVP for Movie Night",
+    highlight: "Please book your place by Tuesday 27 October, including the full names of any guests you're bringing.",
+    buttonText: "Book your place",
     buttonLink: "https://forms.cloud.microsoft/e/g6v5JjmiPy",
     image: "halloween-movie-night.png",
     theme: "halloween"
