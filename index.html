@@ -194,6 +194,28 @@
   .bullets { list-style: none; margin: 4px 0 24px; padding: 20px 26px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); display: grid; gap: 10px; }
   .bullets li { position: relative; padding-left: 26px; font-size: 1.05rem; line-height: 1.55; color: var(--ink); }
   .bullets li::before { content: ""; position: absolute; left: 2px; top: 0.55em; width: 7px; height: 7px; background: var(--gold); transform: rotate(45deg); }
+  /* Event themes: set theme: "halloween" in events.js */
+  body.theme-halloween {
+    --bg: #fff4e8; --surface: #fffcf7; --ink: #2b1838; --muted: #4f3b57; --line: #f0d4bb;
+    --gold: #b4501a; --gold-soft: #f2a35e; --gem: #6b2fa0;
+    background-image: radial-gradient(ellipse at top, rgba(242,163,94,.18), transparent 60%);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) body.theme-halloween {
+      --bg: #1c1222; --surface: #261a2d; --ink: #fbefe2; --muted: #e2cfc4; --line: #42304a;
+      --gold: #f39a4c; --gold-soft: #8a5530; --gem: #c39be6;
+    }
+  }
+  :root[data-theme="dark"] body.theme-halloween {
+    --bg: #1c1222; --surface: #261a2d; --ink: #fbefe2; --muted: #e2cfc4; --line: #42304a;
+    --gold: #f39a4c; --gold-soft: #8a5530; --gem: #c39be6;
+  }
+  body.theme-halloween .cta { border-color: var(--gold); color: var(--gold); }
+  body.theme-halloween .cta:hover { background: var(--gold); color: var(--surface); }
+  .detail-image { display: block; width: 100%; max-width: 440px; height: auto; margin: 0 auto 34px; border: 1px solid var(--line); }
+  .detail-actions.top { margin: 26px 0 34px; }
+  .detail-actions.top .cta { background: var(--gold); border-color: var(--gold); color: var(--surface); padding-left: 34px; padding-right: 34px; }
+  .detail-actions.top .cta:hover { background: var(--ink); border-color: var(--ink); color: var(--surface); }
   .detail-actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 34px; }
   .detail-actions .cta { white-space: normal; text-align: center; }
   .detail-foot { text-align: center; margin-top: 52px; padding-top: 24px; border-top: 1px solid var(--line); }
@@ -362,7 +384,8 @@
              organiser: e.organiser, teaser: e.teaser, link: e.link, dateText: e.dateText,
              details: Array.isArray(e.details) ? e.details.filter(has) : (has(e.details) ? [e.details] : []),
              highlight: e.highlight, buttonText: e.buttonText, buttonLink: e.buttonLink,
-             photos: Array.isArray(e.photos) ? e.photos.filter(has) : [], photosTitle: e.photosTitle };
+             photos: Array.isArray(e.photos) ? e.photos.filter(has) : [], photosTitle: e.photosTitle,
+             image: e.image, theme: e.theme };
   }).filter(Boolean);
 
   // Give every event with details a web-address-friendly id, e.g. "quarterly-celebrations-q3"
@@ -610,8 +633,10 @@
         '<h1>' + esc(e.name) + '</h1>' +
         document.querySelector(".ornament").outerHTML +
       '</header>' +
+      (has(e.image) ? '<img class="detail-image" src="' + esc(e.image) + '" alt="' + esc(e.name) + '">' : '') +
       '<dl class="facts">' + facts.map(function (f) { return '<div><dt>' + f[0] + '</dt><dd>' + esc(f[1]) + '</dd></div>'; }).join("") + '</dl>' +
       (has(e.highlight) ? '<p class="highlight">' + esc(e.highlight) + '</p>' : '') +
+      (has(e.buttonLink) ? '<div class="detail-actions top">' + actions[0] + '</div>' : '') +
       '<div class="detail-body">' + bodyHtml(e.details) + '</div>' +
       (actions.length ? '<div class="detail-actions">' + actions.join("") + '</div>' : '') +
       (e.photos.length ? '<section class="gallery"><h2>' + esc(has(e.photosTitle) ? e.photosTitle : "Gallery") + '</h2><div class="photos">' +
@@ -661,6 +686,7 @@
     var id = decodeURIComponent(location.hash.replace(/^#/, ""));
     var e = byId[id], pg = pages[id];
     if (lb) lb.hidden = true;
+    document.body.className = e && has(e.theme) ? "theme-" + String(e.theme).replace(/[^a-z0-9-]/gi, "") : "";
     if (e) { showDetail(e); hub.hidden = true; detail.hidden = false; window.scrollTo(0, 0); }
     else if (pg) { showPage(pg); hub.hidden = true; detail.hidden = false; window.scrollTo(0, 0); }
     else { detail.hidden = true; hub.hidden = false; document.title = "What's On"; }

@@ -37,6 +37,9 @@
   photos      Optional. Photos for the event's own page, e.g. ["q3-01.jpg", "q3-02.jpg"].
               Upload the photos to GitHub next to index.html first. The first photo is shown large. Leave as [] for none.
   photosTitle Optional. A heading above the photos, e.g. "Moments from our Q2 celebration".
+  image       Optional. One picture shown at the top of the event page, e.g. "halloween-movie-night.png".
+              Upload it to GitHub next to index.html first.
+  theme       Optional. Changes the event page's colours. Write "halloween" for pumpkin and plum tones.
 
   Keep the quote marks "like this" around every value.
   You don't need to delete old events: once their date has passed they move to "Past" automatically.
@@ -133,7 +136,7 @@ const EVENTS = [
     dateText: "",
     repeat: "",
     time: "5:30 PM",
-    location: "Bvlgari Cinema",
+    location: "Bvlgari Cinema (B2 Level)",
     organiser: "La Dolce Vita",
     teaser: "A spooktacular evening of film and treats, launching our new Colleague Cinema Club. Friends welcome!",
     link: "",
@@ -150,7 +153,9 @@ const EVENTS = [
     ],
     highlight: "Please RSVP by Tuesday 27 October, including the full names of any guests you're bringing.",
     buttonText: "RSVP for Movie Night",
-    buttonLink: "https://forms.cloud.microsoft/e/g6v5JjmiPy"
+    buttonLink: "https://forms.cloud.microsoft/e/g6v5JjmiPy",
+    image: "halloween-movie-night.png",
+    theme: "halloween"
   },
   {
     name: "International Men's Day",
