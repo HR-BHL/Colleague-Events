@@ -213,6 +213,18 @@
   }
   body.theme-halloween .cta { border-color: var(--gold); color: var(--gold); }
   body.theme-halloween .cta:hover { background: var(--gold); color: var(--surface); }
+  .films { margin-top: 44px; }
+  .films h2 { display: flex; align-items: center; gap: 18px; margin: 0 0 8px; font: 500 0.92rem/1 var(--font-caps); letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); }
+  .films h2::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .films-intro { margin: 0 0 20px; color: var(--muted); }
+  .film-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(125px, 1fr)); gap: 14px; }
+  .film { background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--gold-soft); display: flex; flex-direction: column; }
+  .film img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 3; object-fit: cover; background: var(--tint); }
+  .film-text { padding: 14px 14px 16px; }
+  .film-title { display: block; font: 600 1.2rem/1.15 var(--font-display); color: var(--ink); }
+  .film-rating { display: inline-block; margin-top: 6px; padding: 3px 7px 2px; border: 1px solid var(--gold-soft); font: 600 0.66rem/1 var(--font-caps); letter-spacing: 0.14em; color: var(--gold); }
+  .film-blurb { margin: 8px 0 0; font-size: 0.95rem; line-height: 1.5; color: var(--muted); }
+  @media (max-width: 560px) { .film-grid { grid-template-columns: 1fr 1fr; gap: 10px; } .film-text { padding: 10px 10px 12px; } .film-title { font-size: 1.12rem; } }
   .detail-image { display: block; width: 100%; max-width: 440px; height: auto; margin: 0 auto 34px; border: 1px solid var(--line); }
   .detail-actions.top { margin: 26px 0 34px; }
   .detail-actions.top .cta { background: var(--gold); border-color: var(--gold); color: var(--surface); padding-left: 34px; padding-right: 34px; }
@@ -386,7 +398,8 @@
              details: Array.isArray(e.details) ? e.details.filter(has) : (has(e.details) ? [e.details] : []),
              highlight: e.highlight, buttonText: e.buttonText, buttonLink: e.buttonLink,
              photos: Array.isArray(e.photos) ? e.photos.filter(has) : [], photosTitle: e.photosTitle,
-             image: e.image, theme: e.theme };
+             image: e.image, theme: e.theme,
+             films: Array.isArray(e.films) ? e.films.filter(function (f) { return f && has(f.title); }) : [], filmsTitle: e.filmsTitle, filmsIntro: e.filmsIntro };
   }).filter(Boolean);
 
   // Give every event with details a web-address-friendly id, e.g. "quarterly-celebrations-q3"
@@ -639,6 +652,14 @@
       (has(e.highlight) ? '<p class="highlight">' + esc(e.highlight) + '</p>' : '') +
       (has(e.buttonLink) ? '<div class="detail-actions top">' + actions[0] + '</div>' : '') +
       '<div class="detail-body">' + bodyHtml(e.details) + '</div>' +
+      (e.films.length ? '<section class="films"><h2>' + esc(has(e.filmsTitle) ? e.filmsTitle : "The films") + '</h2>' +
+        (has(e.filmsIntro) ? '<p class="films-intro">' + esc(e.filmsIntro) + '</p>' : '') + '<ul class="film-grid">' +
+        e.films.map(function (f) {
+          return '<li class="film">' + (has(f.poster) ? '<img src="' + esc(f.poster) + '" alt="' + esc(f.title) + ' poster" loading="lazy" width="450" height="675">' : '') +
+            '<div class="film-text"><span class="film-title">' + esc(f.title) + '</span>' +
+            (has(f.rating) ? '<span class="film-rating">' + esc(f.rating) + '</span>' : '') +
+            (has(f.blurb) ? '<p class="film-blurb">' + esc(f.blurb) + '</p>' : '') + '</div></li>';
+        }).join("") + '</ul></section>' : '') +
       (actions.length ? '<div class="detail-actions">' + actions.join("") + '</div>' : '') +
       (e.photos.length ? '<section class="gallery"><h2>' + esc(has(e.photosTitle) ? e.photosTitle : "Gallery") + '</h2><div class="photos">' +
         e.photos.map(function (src, i) {

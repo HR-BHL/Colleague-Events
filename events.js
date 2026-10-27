@@ -40,6 +40,10 @@
   image       Optional. One picture shown at the top of the event page, e.g. "halloween-movie-night.png".
               Upload it to GitHub next to index.html first.
   theme       Optional. Changes the event page's colours. Write "halloween" for pumpkin and plum tones.
+  films       Optional. A list of films shown as posters, e.g. for a movie vote:
+              { title: "Hocus Pocus", rating: "PG", blurb: "Witchy fun.", poster: "film-hocus-pocus.jpg" },
+  filmsTitle  Optional. The heading above the films.
+  filmsIntro  Optional. A sentence under that heading.
 
   Keep the quote marks "like this" around every value.
   You don't need to delete old events: once their date has passed they move to "Past" automatically.
@@ -146,7 +150,7 @@ const EVENTS = [
       "• Popcorn and drinks",
       "• Halloween sweets",
       "• Ice cream",
-      "You choose the film! On Monday, we will be sending a short vote so you can choose which Halloween classic we screen, so please keep an eye on your inbox.",
+      "You choose the film! Five Halloween classics are up for the vote (see below), so keep an eye on your inbox for the voting form.",
       "Friends are more than welcome to join you; the more, the merrier! When you book, please include the full name of any guests you would like to bring, so that we can share these with Security ahead of the evening.",
       "A screening with a purpose: each Colleague Cinema Club screening supports Save the Children, the charity Bvlgari is proud to work with. We simply ask that everyone attending contributes as little as £1, a small gesture which, together, can make a meaningful difference to children around the world. Contributions can be made by cash or card on the evening.",
       "We look forward to welcoming you, and your friends, for an evening of Halloween thrills and cinematic treats."
@@ -155,7 +159,16 @@ const EVENTS = [
     buttonText: "Book your place",
     buttonLink: "https://forms.cloud.microsoft/e/g6v5JjmiPy",
     image: "halloween-movie-night.png",
-    theme: "halloween"
+    theme: "halloween",
+    filmsTitle: "You choose the film",
+    filmsIntro: "Which one will it be? Here are the five Halloween classics up for the vote.",
+    films: [
+      { title: "Hocus Pocus", rating: "PG", blurb: "Witchy, nostalgic fun.", poster: "film-hocus-pocus.jpg" },
+      { title: "Beetlejuice", rating: "PG", blurb: "Quirky and hilarious.", poster: "film-beetlejuice.jpg" },
+      { title: "Ghostbusters", rating: "PG", blurb: "A classic everyone loves.", poster: "film-ghostbusters.jpg" },
+      { title: "The Others", rating: "PG-13", blurb: "A creepy old house with a brilliant twist.", poster: "film-the-others.jpg" },
+      { title: "The Sixth Sense", rating: "PG-13", blurb: "Properly chilling, with an unforgettable ending.", poster: "film-sixth-sense.jpg" }
+    ]
   },
   {
     name: "International Men's Day",
