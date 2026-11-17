@@ -10,18 +10,22 @@
 <style>
   /* Layout: a centred jeweller's-catalogue masthead on ivory, quiet letterspaced filters, then events as a grid of finely framed cards grouped by month. */
   :root {
-    --bg: #f9f4ea;
-    --surface: #fffdf8;
-    --ink: #1d2e27;
-    --muted: #42504a;
-    --line: #e7dcc5;
-    --gold: #a3172b;
-    --gold-soft: #c9a24c;
-    --gem: #1f6b4a;
-    --tint: #f5ead6;
-    --sparkle: 201, 162, 76;
-    --holly: #1f6b4a;
-    --glow: rgba(163, 23, 43, .07);
+    --bg: #f4f6f3;
+    --surface: #ffffff;
+    --ink: #123128;
+    --muted: #3d5249;
+    --line: #d9e2dc;
+    --gold: #b0132d;
+    --gold-soft: #c6a04a;
+    --gem: #17694a;
+    --tint: #eaf2ed;
+    --holly: #17694a;
+    --glow: rgba(23, 105, 74, .06);
+    --band: linear-gradient(180deg, #0c3a2c 0%, #0f4a37 70%, #125a42 100%);
+    --band-glow: radial-gradient(ellipse 60% 70% at 50% 30%, rgba(226, 191, 102, .22), transparent 70%);
+    --band-ink: #ffffff;
+    --band-muted: #d6e6dd;
+    --band-gold: #e7c46c;
     --font-display: "Cormorant Garamond", "Didot", "Bodoni 72", Georgia, serif;
     --font-caps: "Cinzel", "Trajan Pro", "Optima", Georgia, serif;
     --font-body: "Jost", "Futura", "Century Gothic", "Segoe UI", system-ui, sans-serif;
@@ -30,14 +34,20 @@
     :root:not([data-theme="light"]) {
       --bg: #0f1f1a; --surface: #152a23; --ink: #f6f0e4; --muted: #d3d9d2; --line: #2b4339;
       --gold: #e6bd62; --gold-soft: #9c7a35; --gem: #f08a93; --tint: #1c352c;
-      --holly: #6fb58c; --sparkle: 246, 240, 228; --glow: rgba(230, 189, 98, .08);
+      --holly: #6fb58c; --glow: rgba(230, 189, 98, .06);
+      --band: linear-gradient(180deg, #5c0d1b 0%, #7a1224 70%, #8a1629 100%);
+      --band-glow: radial-gradient(ellipse 60% 70% at 50% 30%, rgba(231, 196, 108, .2), transparent 70%);
+      --band-ink: #fff8ee; --band-muted: #f2d9d3; --band-gold: #ecc977;
       color-scheme: dark;
     }
   }
   :root[data-theme="dark"] {
     --bg: #0f1f1a; --surface: #152a23; --ink: #f6f0e4; --muted: #d3d9d2; --line: #2b4339;
     --gold: #e6bd62; --gold-soft: #9c7a35; --gem: #f08a93; --tint: #1c352c;
-    --holly: #6fb58c; --sparkle: 246, 240, 228; --glow: rgba(230, 189, 98, .08);
+    --holly: #6fb58c; --glow: rgba(230, 189, 98, .06);
+      --band: linear-gradient(180deg, #5c0d1b 0%, #7a1224 70%, #8a1629 100%);
+      --band-glow: radial-gradient(ellipse 60% 70% at 50% 30%, rgba(231, 196, 108, .2), transparent 70%);
+      --band-ink: #fff8ee; --band-muted: #f2d9d3; --band-gold: #ecc977;
     color-scheme: dark;
   }
 
@@ -49,8 +59,30 @@
     font: 400 17px/1.65 var(--font-body);
     -webkit-font-smoothing: antialiased;
   }
-  /* Festive: gently falling snow and a gold star ornament */
-  #snow { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+  /* Festive: evergreen masthead band, falling snow and a holly-and-star ornament */
+  html, body { overflow-x: hidden; }
+  body:not(.theme-halloween) header { position: relative; color: var(--band-ink); padding-bottom: 46px; }
+  body:not(.theme-halloween) header::before {
+    content: ""; position: absolute; z-index: -1; top: -60px; bottom: 0; left: calc(50% - 50vw); right: calc(50% - 50vw);
+    background: var(--band-glow), var(--band);
+    border-bottom: 3px solid var(--gold-soft); box-shadow: 0 1px 0 4px var(--bg), 0 1px 0 5px var(--gold-soft);
+  }
+  body:not(.theme-halloween) header h1 { color: var(--band-ink); }
+  body:not(.theme-halloween) header h1 em, body:not(.theme-halloween) header .eyebrow { color: var(--band-gold); }
+  body:not(.theme-halloween) header .lede, body:not(.theme-halloween) header .today { color: var(--band-muted); }
+  body:not(.theme-halloween) header .ornament::before, body:not(.theme-halloween) header .ornament::after { background: var(--band-gold); opacity: .7; }
+  body:not(.theme-halloween) header .ornament .star path { fill: var(--band-gold); }
+  body:not(.theme-halloween) header .ornament .berry path { fill: #7cc79d; }
+  body:not(.theme-halloween) header .page-links a { background: transparent; color: var(--band-gold); border-color: var(--band-gold); outline-color: rgba(231, 196, 108, .45); }
+  body:not(.theme-halloween) header .page-links a:hover { background: var(--band-gold); color: #0c3a2c; }
+  body:not(.theme-halloween) .detail-head { padding-bottom: 40px; margin-bottom: 30px; }
+  body:not(.theme-halloween) .detail-head::before { top: -140px; }
+  body:not(.theme-halloween) .detail > .back:first-child { color: var(--band-muted); position: relative; z-index: 1; }
+  body:not(.theme-halloween) .detail > .back:first-child:hover { color: var(--band-ink); }
+  .event { border-top: 3px solid var(--gold) !important; }
+  .event:hover { border-top-color: var(--gold-soft) !important; }
+  .date { background: var(--tint); border-color: var(--gold-soft); }
+  #snow { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
   .wrap { position: relative; z-index: 1; }
   .ornament .star { width: 18px; height: 18px; }
   .ornament .berry { width: 22px; height: 12px; }
@@ -734,37 +766,56 @@
 })();
 </script>
 <script>
-/* Gentle falling snow. Hidden for anyone who prefers reduced motion. */
+/* Gentle falling snow: soft round flakes plus a few six-armed snowflakes.
+   Hidden for anyone who prefers reduced motion. */
 (function () {
   var c = document.getElementById("snow");
   if (!c || !c.getContext || (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) { if (c) c.remove(); return; }
-  var ctx = c.getContext("2d"), flakes = [], w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2), rgb = "201, 162, 76";
-  function colour() { var v = getComputedStyle(document.documentElement).getPropertyValue("--sparkle").trim(); if (v) rgb = v; }
+  var ctx = c.getContext("2d"), flakes = [], w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
   function size() {
     w = window.innerWidth; h = window.innerHeight;
     c.width = w * dpr; c.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    var n = Math.round(Math.min(70, w / 18));
+    var n = Math.round(Math.min(60, w / 20));
     while (flakes.length < n) flakes.push(make(true));
     flakes.length = n;
   }
   function make(anywhere) {
-    return { x: Math.random() * w, y: anywhere ? Math.random() * h : -10, r: 0.8 + Math.random() * 2.2,
-             s: 0.25 + Math.random() * 0.6, d: Math.random() * Math.PI * 2, o: 0.25 + Math.random() * 0.45 };
+    var star = Math.random() < 0.3;
+    return { x: Math.random() * w, y: anywhere ? Math.random() * h : -20,
+             r: star ? 6 + Math.random() * 6 : 2.5 + Math.random() * 3.5, star: star,
+             s: 0.3 + Math.random() * 0.7, d: Math.random() * Math.PI * 2,
+             a: Math.random() * Math.PI, spin: (Math.random() - 0.5) * 0.01,
+             o: 0.7 + Math.random() * 0.3 };
+  }
+  function drawStar(f) {
+    ctx.save(); ctx.translate(f.x, f.y); ctx.rotate(f.a);
+    ctx.lineWidth = Math.max(1.2, f.r / 5); ctx.lineCap = "round";
+    ctx.beginPath();
+    for (var k = 0; k < 6; k++) {
+      ctx.moveTo(0, 0); ctx.lineTo(0, -f.r);
+      ctx.moveTo(0, -f.r * 0.55); ctx.lineTo(f.r * 0.28, -f.r * 0.8);
+      ctx.moveTo(0, -f.r * 0.55); ctx.lineTo(-f.r * 0.28, -f.r * 0.8);
+      ctx.rotate(Math.PI / 3);
+    }
+    ctx.stroke(); ctx.restore();
   }
   function tick() {
     ctx.clearRect(0, 0, w, h);
+    ctx.shadowColor = "rgba(18, 49, 40, .35)"; ctx.shadowBlur = 3;
     for (var i = 0; i < flakes.length; i++) {
       var f = flakes[i];
-      f.y += f.s; f.d += 0.01; f.x += Math.sin(f.d) * 0.35;
-      if (f.y > h + 10) flakes[i] = make(false);
-      ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(" + rgb + "," + f.o + ")"; ctx.fill();
+      f.y += f.s; f.d += 0.01; f.x += Math.sin(f.d) * 0.45; f.a += f.spin;
+      if (f.y > h + 20) flakes[i] = f = make(false);
+      ctx.globalAlpha = f.o;
+      ctx.fillStyle = ctx.strokeStyle = "#ffffff";
+      if (f.star) drawStar(f);
+      else { ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2); ctx.fill(); }
     }
+    ctx.globalAlpha = 1;
     requestAnimationFrame(tick);
   }
-  colour(); size(); tick();
+  size(); tick();
   window.addEventListener("resize", size);
-  if (window.matchMedia) matchMedia("(prefers-color-scheme: dark)").addEventListener("change", colour);
 })();
 </script>
 </body>
