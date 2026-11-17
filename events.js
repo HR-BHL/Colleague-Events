@@ -172,19 +172,65 @@ const EVENTS = [
   },
   {
     name: "International Men's Day",
-    date: "2026-11-01",
-    endDate: "2026-11-30",
-    dateText: "Coming soon",
+    date: "2026-11-19",
+    endDate: "",
+    dateText: "",
+    repeat: "",
+    time: "From 12:00 PM",
+    location: "Screening Room (B2 Level) & Nolita",
+    organiser: "",
+    teaser: "An afternoon of short films on living well, followed by beer and pizza in Nolita.",
+    link: "",
+    details: [
+      "On Thursday 19 November, we mark International Men's Day, celebrating the men in our team and shining a light on men's health and wellbeing. This year's theme is The Future Is Everyone.",
+      "• 12:00 PM to 3:45 PM: short films on living well in the Screening Room (B2 Level). No booking needed, simply drop in on your break and stay as long as you can.",
+      "• 4:00 PM: beer and pizza in Nolita.",
+      "Our International Men's Day page has the full film programme, a short health quiz, quick wellbeing tips and details of free, confidential support available to you at any time."
+    ],
+    highlight: "No booking needed. Drop in whenever your break allows, and come back for another film if you can.",
+    buttonText: "Visit the Men's Day page",
+    buttonLink: "https://hr-bhl.github.io/International-Mens-Day/"
+  },
+  {
+    name: "Children's Christmas Wish List",
+    date: "2026-11-16",
+    endDate: "2026-11-22",
+    dateText: "",
     repeat: "",
     time: "",
     location: "",
     organiser: "",
-    teaser: "Celebrating the men in our team and shining a light on men's health and wellbeing.",
+    teaser: "Santa's elves need to know what your little ones are wishing for. Share their wish list by Sunday 22 November.",
     link: "",
-    details: [],
-    highlight: "",
-    buttonText: "",
-    buttonLink: ""
+    details: [
+      "Ahead of our Children's Christmas Party, Santa's elves are busy preparing a gift for every child, and they would love to know what your little ones are wishing for this year.",
+      "If you have children aged 0 to 12, please complete the Christmas Wish List form for each child by Sunday 22 November, so the elves have plenty of time to prepare every gift.",
+      "The wish list is open to colleagues' own children only."
+    ],
+    highlight: "Please submit your child's wish list by Sunday 22 November 2026.",
+    buttonText: "Fill in the wish list",
+    buttonLink: "https://forms.cloud.microsoft/e/Q04zPcTSKp"
+  },
+  {
+    name: "Children's Christmas Party",
+    date: "2026-12-19",
+    endDate: "",
+    dateText: "",
+    repeat: "",
+    time: "",
+    location: "",
+    organiser: "",
+    teaser: "Save the date for our annual Children's Christmas Party, for colleagues' children aged 0 to 12.",
+    link: "",
+    details: [
+      "We are delighted to announce our annual Children's Christmas Party, taking place on Saturday 19 December for colleagues' children aged 0 to 12.",
+      "Further details will follow shortly, so please save the date.",
+      "To help us bring a little extra Christmas magic, please complete the Christmas Wish List for each of your children by Sunday 22 November.",
+      "The party is open to colleagues' own children only. If you have any questions, please contact the People & Culture Team."
+    ],
+    highlight: "Save the date: Saturday 19 December 2026. Wish lists close on Sunday 22 November.",
+    buttonText: "Fill in the wish list",
+    buttonLink: "https://forms.cloud.microsoft/e/Q04zPcTSKp"
   },
   {
     name: "Christmas Celebrations",
