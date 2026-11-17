@@ -180,16 +180,11 @@ const EVENTS = [
     location: "Screening Room (B2 Level) & Nolita",
     organiser: "",
     teaser: "An afternoon of short films on living well, followed by beer and pizza in Nolita.",
-    link: "",
-    details: [
-      "On Thursday 19 November, we mark International Men's Day, celebrating the men in our team and shining a light on men's health and wellbeing. This year's theme is The Future Is Everyone.",
-      "• 12:00 PM to 3:45 PM: short films on living well in the Screening Room (B2 Level). No booking needed, simply drop in on your break and stay as long as you can.",
-      "• 4:00 PM: beer and pizza in Nolita.",
-      "Our International Men's Day page has the full film programme, a short health quiz, quick wellbeing tips and details of free, confidential support available to you at any time."
-    ],
-    highlight: "No booking needed. Drop in whenever your break allows, and come back for another film if you can.",
-    buttonText: "Visit the Men's Day page",
-    buttonLink: "https://hr-bhl.github.io/International-Mens-Day/"
+    link: "https://hr-bhl.github.io/International-Mens-Day/",
+    details: [],
+    highlight: "",
+    buttonText: "",
+    buttonLink: ""
   },
   {
     name: "Children's Christmas Wish List",
