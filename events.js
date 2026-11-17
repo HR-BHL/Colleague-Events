@@ -1,5 +1,5 @@
 /*
-  WHAT'S ON: EVENT LIST
+  COLLEAGUE EVENTS: EVENT LIST
   =====================
   This is the only file you need to edit to add, change or remove events.
 

@@ -1,11 +1,11 @@
 /*
-  WHAT'S ON: EXTRA PAGES
+  COLLEAGUE EVENTS: EXTRA PAGES
   ======================
   Pages that aren't events, like "About La Dolce Vita".
   Each page sits between { and }, followed by a comma.
 
   id          The page's web address ending, e.g. "la-dolce-vita" makes .../#la-dolce-vita
-  linkText    The words on the link at the top of the What's On page. Leave as "" to hide the link.
+  linkText    The words on the link at the top of the Colleague Events page. Leave as "" to hide the link.
   eyebrow     A small label above the title, e.g. "About us".
   title       The page title.
   intro       One or two sentences shown large under the title.

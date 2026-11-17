@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>What's On</title>
+<title>Colleague Events</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap">
@@ -99,7 +99,7 @@
     color: var(--gold); margin: 0 0 20px; padding-left: 0.36em;
   }
   h1 {
-    font: 400 clamp(3.4rem, 11vw, 6.6rem)/0.92 var(--font-display);
+    font: 400 clamp(2.9rem, 10vw, 5.8rem)/0.95 var(--font-display);
     letter-spacing: 0.01em; margin: 0; text-wrap: balance;
   }
   h1 em { font-style: italic; color: var(--gold); }
@@ -149,7 +149,8 @@
     font: 500 0.92rem/1 var(--font-caps); letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold);
     margin: 0;
   }
-  .month h2::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .month h2 { justify-content: center; padding-left: 0.3em; }
+  .month h2::before, .month h2::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 
   .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 310px)); justify-content: center; gap: 22px; margin-top: 20px; }
   .event {
@@ -368,7 +369,7 @@
 <div id="hub">
   <header>
     <img class="logo" src="logo.png" alt="Bvlgari Hotel London" width="900" height="220">
-    <h1>What's <em>On</em></h1>
+    <h1>Colleague <em>Events</em></h1>
     <div class="ornament" aria-hidden="true">
       <svg class="berry" viewBox="0 0 22 12"><path d="M11 6C7 1 2 1 0.5 3 3 3 5 5 6 7c-2 0-3.5 1-4 2.5C5 10 8 9 11 6z" fill="var(--holly)"/><path d="M11 6c4-5 9-5 10.5-3C19 3 17 5 16 7c2 0 3.5 1 4 2.5C17 10 14 9 11 6z" fill="var(--holly)"/></svg><svg class="star" viewBox="0 0 20 20"><path d="M10 0.8l2.2 6.6 6.9 0.1-5.6 4.1 2.1 6.6L10 14.2l-5.6 4 2.1-6.6L0.9 7.5l6.9-0.1z" fill="var(--gold-soft)"/></svg><svg class="berry" viewBox="0 0 22 12" style="transform:scaleX(-1)"><path d="M11 6C7 1 2 1 0.5 3 3 3 5 5 6 7c-2 0-3.5 1-4 2.5C5 10 8 9 11 6z" fill="var(--holly)"/><path d="M11 6c4-5 9-5 10.5-3C19 3 17 5 16 7c2 0 3.5 1 4 2.5C17 10 14 9 11 6z" fill="var(--holly)"/></svg>
     </div>
@@ -671,7 +672,7 @@
       galleryHtml(photos, p.photosTitle) +
       (has(p.note) ? '<p class="page-note">' + esc(p.note) + '</p>' : '') +
       '<div class="detail-foot"><a class="back" href="#">← Back to all events</a></div>';
-    document.title = p.title + " · What's On";
+    document.title = p.title + " · Colleague Events";
     Array.prototype.forEach.call(detail.querySelectorAll(".photo"), function (b) {
       b.addEventListener("click", function () { openLightbox(photos, +b.dataset.i, b); });
     });
@@ -689,7 +690,7 @@
       '<a class="back" href="#">← All events</a>' +
       '<header class="detail-head">' +
         '<img class="logo" src="' + esc(logoSrc) + '" alt="Bvlgari Hotel London" width="900" height="220">' +
-        '<p class="eyebrow">What\'s On</p>' +
+        '<p class="eyebrow">Colleague Events</p>' +
         '<h1>' + esc(e.name) + '</h1>' +
         document.querySelector(".ornament").outerHTML +
       '</header>' +
@@ -713,7 +714,7 @@
             '<img src="' + esc(src) + '" alt="" loading="' + (i < 4 ? "eager" : "lazy") + '" width="1600" height="1067"></button>';
         }).join("") + '</div></section>' : '') +
       '<div class="detail-foot"><a class="back" href="#">← Back to all events</a></div>';
-    document.title = e.name + " · What's On";
+    document.title = e.name + " · Colleague Events";
     Array.prototype.forEach.call(detail.querySelectorAll(".photo"), function (b) {
       b.addEventListener("click", function () { openLightbox(e.photos, +b.dataset.i, b); });
     });
@@ -757,7 +758,7 @@
     document.body.className = e && has(e.theme) ? "theme-" + String(e.theme).replace(/[^a-z0-9-]/gi, "") : "";
     if (e) { showDetail(e); hub.hidden = true; detail.hidden = false; window.scrollTo(0, 0); }
     else if (pg) { showPage(pg); hub.hidden = true; detail.hidden = false; window.scrollTo(0, 0); }
-    else { detail.hidden = true; hub.hidden = false; document.title = "What's On"; }
+    else { detail.hidden = true; hub.hidden = false; document.title = "Colleague Events"; }
   }
   window.addEventListener("hashchange", route);
 
