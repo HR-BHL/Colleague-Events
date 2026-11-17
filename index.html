@@ -151,7 +151,7 @@
   }
   .month h2::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 22px; margin-top: 20px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 310px)); justify-content: center; gap: 22px; margin-top: 20px; }
   .event {
     position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: 1fr auto; gap: 18px;
     background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--gold-soft); padding: 26px 24px 24px;
